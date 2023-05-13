@@ -1,21 +1,29 @@
 import React from "react";
-
+import WorkingHrs from "./TotalWorkingHrs";
 const CalenderCompo = ({ dates, todaysDate }) => {
+  const onChangeLogin = () => {};
   return (
     <div>
       {dates.map((item) => (
         <>
           <div className="rowWrapper">
             <div className="dateday">
-              <span>{item.day}</span>
+              <span className="day">{item.day}</span>
 
               <span>{item.dateString}</span>
             </div>
             {new Date(item.dateString).getTime() <
             new Date(todaysDate).getTime() ? (
-              <span>Past</span>
+              <span className="past">Past</span>
             ) : (
-              <div className="hrs">8pm</div>
+              WorkingHrs.map((item) => (
+                <div className="hrs">
+                  <span>
+                    <input type="checkbox" onClick={onChangeLogin}></input>
+                  </span>
+                  <span>{item.time}</span>
+                </div>
+              ))
             )}
           </div>
           <div className="border"></div>

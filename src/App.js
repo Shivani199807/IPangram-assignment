@@ -1,22 +1,31 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DateComponent from "./Components/DateComponent";
 import TimeZone from "./Components/TimeZone";
 import CalenderCompo from "./Components/CalenderCompo";
 
 function App() {
-  const today = new Date();
-  const todayUTC = new Date(
-    today.getTime() + today.getTimezoneOffset() * 60 * 1000
-  );
+  const [timeZone, setTimeZone] = useState("UTC timeZone-05:30(IST)");
+  const [timeZoneDate, setTimeZoneDate] = useState(new Date());
+  useEffect(() => {
+    if (timeZone == "UTC timeZone-0") {
+      const todayUTC = new Date(
+        timeZoneDate.getTime() + timeZoneDate.getTimezoneOffset() * 60 * 1000
+      );
+      setTimeZoneDate(todayUTC);
+    } else {
+      setTimeZoneDate(new Date());
+    }
+  }, [timeZone]);
+  console.log(timeZoneDate);
 
   const startOfWeekUTC = new Date(
-    todayUTC.getUTCFullYear(),
-    todayUTC.getUTCMonth(),
-    todayUTC.getUTCDate() - todayUTC.getUTCDay() + 1
+    timeZoneDate.getUTCFullYear(),
+    timeZoneDate.getUTCMonth(),
+    timeZoneDate.getUTCDate() - timeZoneDate.getUTCDay() + 1
   );
   const options = { month: "short", day: "numeric", year: "numeric" };
-  const refinedDate = todayUTC
+  const refinedDate = timeZoneDate
     .toLocaleString("en-US", options)
     .replace(/ /g, "");
 
@@ -68,13 +77,13 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="pageWrapper">
       <DateComponent
         currentDate={refinedDate}
         previousWeek={previousWeek}
         nextWeek={nextWeek}
       />
-      <TimeZone />
+      <TimeZone setTimeZone={setTimeZone} />
       <CalenderCompo dates={dates} todaysDate={refinedDate} />
     </div>
   );
