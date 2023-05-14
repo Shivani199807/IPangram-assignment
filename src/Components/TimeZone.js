@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./MainStyle.css";
 const TimeZone = ({ setTimeZone }) => {
   const timeZoneSelected = (e) => {
     setTimeZone(e.target.value);

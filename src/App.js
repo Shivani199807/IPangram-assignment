@@ -5,8 +5,14 @@ import TimeZone from "./Components/TimeZone";
 import CalenderCompo from "./Components/CalenderCompo";
 
 function App() {
+  //here setting the timezone initially its  ist timezone
   const [timeZone, setTimeZone] = useState("UTC timeZone-05:30(IST)");
+
+  // here setting the current date based on timezone. Initally it is indian time zone date which we are getting as per our laptop
+  //system date .
   const [timeZoneDate, setTimeZoneDate] = useState(new Date());
+
+  // here con change of timezone updating the hrs whether it is indian time zone of UTC-0 which is 5:30 hrs early
   useEffect(() => {
     if (timeZone == "UTC timeZone-0") {
       const todayUTC = new Date(
@@ -17,7 +23,8 @@ function App() {
       setTimeZoneDate(new Date());
     }
   }, [timeZone]);
-  console.log(timeZoneDate);
+
+  //here calculating the start week of current date
 
   const startOfWeekUTC = new Date(
     timeZoneDate.getUTCFullYear(),
@@ -31,6 +38,8 @@ function App() {
 
   // Initialize the current week's dates
   const [dates, setDates] = useState(getWeekDates(startOfWeekUTC));
+
+  // function to get the week dates
   function getWeekDates(startOfWeekUTC) {
     const dates = [];
 
@@ -44,16 +53,16 @@ function App() {
         .replace(/ /g, "");
 
       const day = dateUTC.toString().split(" ").slice(0, 1).join(" ");
-      // console.log(day);
+
       dates.push({ dateUTC, dateString, day });
     }
     return dates;
   }
-
+  // here updating the dates state based on previous and next week
   function updateWeekDates(weekStartUTC) {
     setDates(getWeekDates(weekStartUTC));
   }
-
+  // function to calculate the previous week dates
   const previousWeek = () => {
     const startOfPreviousWeekUTC = new Date(
       dates[0]["dateUTC"].getTime() - 7 * 24 * 60 * 60 * 1000
@@ -66,6 +75,8 @@ function App() {
       )
     );
   };
+
+  // function to calculate the next week dates
   const nextWeek = () => {
     updateWeekDates(
       new Date(

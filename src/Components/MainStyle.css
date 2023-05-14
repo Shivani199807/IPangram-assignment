@@ -17,9 +17,30 @@
   flex-direction: column;
   margin: 8px 8px 20px 8px;
 }
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
 .timeNew {
   padding: 5px 0px;
 }
+@media only screen and (max-width: 378px) {
+  .timeZonWrapper {
+    width: 96%;
+  }
+}
+
 /* calender compo */
 .rowWrapper {
   display: flex;
@@ -33,9 +54,17 @@
   padding: 5px;
   font-size: 14px;
 }
+.timeWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 5px;
+  width: 90%;
+}
 .hrs {
   padding: 5px;
 }
+
 .past {
   padding: 5px;
 }
@@ -45,4 +74,21 @@
 .day {
   color: maroon;
   font-weight: 500;
+}
+@media only screen and (max-width: 768px) {
+  .rowWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .dateday {
+    width: 98%;
+  }
+  .timeWrapper {
+    width: 98%;
+  }
+}
+@media only screen and (max-width: 378px) {
+  .dateday {
+    width: 96%;
+  }
 }

@@ -1,14 +1,19 @@
 import React from "react";
-import "./DateComponent.css";
+import "./MainStyle.css";
 const DateComponent = ({ currentDate, previousWeek, nextWeek }) => {
   return (
     <div className="wrapperDiv">
       <div>
-        <span onClick={previousWeek}>Previous Week</span>
+        <span onClick={previousWeek}>
+          <i class="arrow left"></i>Previous Week
+        </span>
       </div>
       <div>{currentDate}</div>
       <div>
-        <span onClick={nextWeek}>Next week</span>
+        <span onClick={nextWeek}>
+          {" "}
+          Next week <i class="arrow right"></i>
+        </span>
       </div>
     </div>
   );
